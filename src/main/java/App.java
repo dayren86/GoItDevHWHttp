@@ -41,7 +41,7 @@ public class App {
                 Pet.Status.available);
 
 
-        File file = new File("src/Screenshot_23.png");
+        File file = new File("src/Screenshot_23.jpg");
         ApiResponse apiResponse = new ApiResponse(10, file.getAbsoluteFile());
 
         RequestsPets requestsPets = new RequestsPets();
@@ -50,7 +50,7 @@ public class App {
 //        System.out.println(requestsPets.getPetByStatus(Pet.Status.available));
 //        System.out.println(requestsPets.updatePet(pet2));
 //        System.out.println(requestsPets.getPetById(10).body());
-        System.out.println(requestsPets.updatePetUploadImage(apiResponse));
+        //requestsPets.updatePetUploadImage(apiResponse);
     }
 
 }

@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import entity.pet.ApiResponse;
 import entity.pet.Pet;
+import entity.store.Store;
+import entity.user.User;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -14,6 +16,13 @@ public class ServiceGson {
 
     public String toJsonPet(Pet pet) {
         return gson.toJson(pet);
+    }
+    public String toJsonStore(Store store) {
+        return gson.toJson(store);
+    }
+
+    public String toJsonUser(User user) {
+        return gson.toJson(user);
     }
 
     public Pet fromJsonPet(String json) {

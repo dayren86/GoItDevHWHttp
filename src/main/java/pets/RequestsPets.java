@@ -3,6 +3,9 @@ package pets;
 import entity.pet.ApiResponse;
 import entity.pet.Pet;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import pets.service.ServiceGson;
 import pets.service.ServiceHttp;
 
@@ -10,6 +13,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
@@ -134,16 +138,37 @@ public class RequestsPets {
         return arr;
     }
 
-    public String updatePetUploadImage(ApiResponse apiResponse) throws IOException, InterruptedException {
+    public void updatePetUploadImage(ApiResponse apiResponse) throws IOException, InterruptedException {
+
+        Document post = Jsoup
+                .connect(URL + "/" + apiResponse.getPetId() + "/uploadImage")
+                .header("Content-Type", "multipart/form-data")
+                .data("file", "Screenshot_23.jpeg")
+                //.data("type", "image/jpeg")
+                .ignoreHttpErrors(true)
+                .post();
 
 
 
-        File file = new File("src/Screenshot_23.png");
-       return createPost(file);
-
-
-
+        System.out.println(post.text());
+//        HttpRequest request = HttpRequest
+//                .newBuilder()
+//                .uri(URI.create(URL+ "/" + apiResponse.getPetId() + "/uploadImage"))
+//                .header("accept", "application/json")
+//                .header("Content-Type", "multipart/form-data")
+//                //.header("Content-Disposition", "form-data;additionalMetadata=thgj")
+////                .header("Content-Disposition", " file="+ apiResponse.getFile() +";type=image/jpg")
+//                .
+//                .POST(HttpRequest.BodyPublishers.ofString("file=/src/Screenshot_23.jpeg;type=image/jpeg"))
+//                .build();
+//
+//        HttpClient client = HttpClient.newBuilder().build();
+//
+//        return client.send(request, HttpResponse.BodyHandlers.ofFile());
     }
+
+
+
 //    {
 //        "code": 200,
 //            "type": "unknown",
