@@ -12,38 +12,36 @@ import java.net.http.HttpResponse;
 public class RequestsStore {
     private static final String URL = "https://petstore.swagger.io/v2/store";
 
-    public Store store = new Store(1,3, 455, "2022-06-26", Store.Status.placed, true);
-
-    public HttpResponse<String> createOrderPets() throws IOException, InterruptedException {
+    public HttpResponse<String> createOrderPets(Store store) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(URL + "/order"))
                 .header("accept", "application/json")
-                .header("Content-Type",  "application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(new ServiceGson().toJsonStore(store)))
                 .build();
 
         return new ServiceHttp().serviceHttpClient(request);
     }
 
-    public HttpResponse<String> findOrderById() throws IOException, InterruptedException {
+    public HttpResponse<String> findOrderById(Store store) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(URL + "/order/" + store.getId()))
                 .header("accept", "application/json")
-                .header("Content-Type",  "application/json")
+                .header("Content-Type", "application/json")
                 .GET()
                 .build();
 
         return new ServiceHttp().serviceHttpClient(request);
     }
 
-    public HttpResponse<String> deleteOrderById() throws IOException, InterruptedException {
+    public HttpResponse<String> deleteOrderById(Store store) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(URL + "/order/" + store.getId()))
                 .header("accept", "application/json")
-                .header("Content-Type",  "application/json")
+                .header("Content-Type", "application/json")
                 .DELETE()
                 .build();
 
@@ -55,17 +53,10 @@ public class RequestsStore {
                 .newBuilder()
                 .uri(URI.create(URL + "/inventory"))
                 .header("accept", "application/json")
-                .header("Content-Type",  "application/json")
+                .header("Content-Type", "application/json")
                 .GET()
                 .build();
 
         return new ServiceHttp().serviceHttpClient(request);
-    }
-    public static void main(String[] args) throws IOException, InterruptedException {
-        RequestsStore requestsStore = new RequestsStore();
-        System.out.println(requestsStore.createOrderPets());
-        System.out.println(requestsStore.findOrderById());
-        System.out.println(requestsStore.deleteOrderById());
-        System.out.println(requestsStore.getInventory().body());
     }
 }

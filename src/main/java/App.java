@@ -3,6 +3,11 @@ import entity.pet.Category;
 import entity.pet.Pet;
 import entity.pet.Tag;
 import pets.RequestsPets;
+import pets.RequestsStore;
+import pets.RequestsUser;
+import pets.data.TestDataPet;
+import pets.data.TestDataStore;
+import pets.data.TestDataUser;
 import pets.service.ServiceGson;
 import pets.service.ServiceHttp;
 
@@ -19,38 +24,32 @@ public class App {
     private final static String URL = "https://petstore.swagger.io/v2/pet";
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
-        List<String> photoUrls = new ArrayList<>();
-        photoUrls.add("testPetPhotoUrl");
-
-        List<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(1,"testTag"));
-
-        Pet pet = new Pet(10,
-                new Category(2, "testCategory"),
-                "testPet",
-                photoUrls,
-                tags,
-                Pet.Status.available);
-
-        Pet pet2 = new Pet(10,
-                new Category(2, "testCategorysssssssss"),
-                "testPetssssssss",
-                photoUrls,
-                tags,
-                Pet.Status.available);
-
-
-        File file = new File("src/Screenshot_23.jpg");
-        ApiResponse apiResponse = new ApiResponse(10, file.getAbsoluteFile());
-
         RequestsPets requestsPets = new RequestsPets();
-//    System.out.println(requestsPets.createPet(pet).body());
-//        System.out.println(requestsPets.getPetById(10).body());
-//        System.out.println(requestsPets.getPetByStatus(Pet.Status.available));
-//        System.out.println(requestsPets.updatePet(pet2));
-//        System.out.println(requestsPets.getPetById(10).body());
-        //requestsPets.updatePetUploadImage(apiResponse);
+        TestDataPet testDataPet = new TestDataPet();
+        System.out.println(requestsPets.createPet(testDataPet.pet).body());
+        System.out.println(requestsPets.getPetById(10).body());
+        System.out.println(requestsPets.getPetByStatus(Pet.Status.available));
+        System.out.println(requestsPets.updatePet(testDataPet.pet2));
+        System.out.println(requestsPets.getPetById(10).body());
+//        requestsPets.updatePetUploadImage(apiResponse);
+
+        RequestsStore requestsStore = new RequestsStore();
+        TestDataStore testDataStore = new TestDataStore();
+        System.out.println(requestsStore.createOrderPets(testDataStore.store));
+        System.out.println(requestsStore.findOrderById(testDataStore.store));
+        System.out.println(requestsStore.deleteOrderById(testDataStore.store));
+        System.out.println(requestsStore.getInventory().body());
+
+        RequestsUser requestsUser = new RequestsUser();
+        TestDataUser testDataUser = new TestDataUser();
+        System.out.println(requestsUser.createUser(testDataUser.user1));
+        System.out.println(requestsUser.createUserArray(testDataUser.userArray).body());
+        System.out.println(requestsUser.createUserList(testDataUser.list).body());
+        System.out.println(requestsUser.getUserByUserName("string"));
+        System.out.println(requestsUser.updateUser(testDataUser.user5));
+        System.out.println(requestsUser.deleteUser("string"));
+        System.out.println(requestsUser.logsUser("testLogin", 12345));
+        System.out.println(requestsUser.logoutUser());
     }
 
 }

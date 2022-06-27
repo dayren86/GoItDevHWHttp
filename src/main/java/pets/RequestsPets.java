@@ -3,7 +3,6 @@ package pets;
 import entity.pet.ApiResponse;
 import entity.pet.Pet;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import pets.service.ServiceGson;
@@ -13,11 +12,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class RequestsPets {
 
