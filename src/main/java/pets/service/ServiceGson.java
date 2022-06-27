@@ -20,17 +20,18 @@ public class ServiceGson {
     public String toJsonStore(Store store) {
         return gson.toJson(store);
     }
-
     public String toJsonUser(User user) {
         return gson.toJson(user);
+    }
+    public String stringJson(String s) {
+        return gson.toJson(s);
+    }
+    public String toJsonApiResponse(ApiResponse apiResponse) {
+        return gson.toJson(apiResponse);
     }
 
     public Pet fromJsonPet(String json) {
         Type typeToken = TypeToken.getParameterized(List.class, Pet.class).getType();
         return gson.fromJson(json, typeToken);
-    }
-
-    public String toJsonApiResponse(ApiResponse apiResponse) {
-        return gson.toJson(apiResponse);
     }
 }

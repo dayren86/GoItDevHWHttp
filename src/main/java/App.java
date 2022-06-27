@@ -31,6 +31,7 @@ public class App {
         System.out.println(requestsPets.getPetByStatus(Pet.Status.available));
         System.out.println(requestsPets.updatePet(testDataPet.pet2));
         System.out.println(requestsPets.getPetById(10).body());
+        System.out.println("1231231" + requestsPets.updatePetStoreData(testDataPet.apiResponse));
 //        requestsPets.updatePetUploadImage(apiResponse);
 
         RequestsStore requestsStore = new RequestsStore();

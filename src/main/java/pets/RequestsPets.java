@@ -65,88 +65,88 @@ public class RequestsPets {
         return new ServiceHttp().serviceHttpClient(request);
     }
 
-//    public HttpResponse<String> updatePetStoreData(int id, String name, Pet.Status status) throws IOException, InterruptedException {
-//        HttpRequest request = HttpRequest
-//                .newBuilder()
-//                .uri(URI.create(URL+ "/" + id))
-//                .header("accept", "application/json")
-//                .header("Content-Type", "application/json")
-//                .POST()
-//                .build();
+    public HttpResponse<String> updatePetStoreData(ApiResponse apiResponse) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(URI.create(URL+ "/" + apiResponse.getPetId()))
+                .header("accept", "application/json")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(new ServiceGson().toJsonApiResponse(apiResponse)))
+                .build();
+
+        return new ServiceHttp().serviceHttpClient(request);
+    }
+
+//    public  String createPost(File file) throws IOException {
 //
-//        return new ServiceHttp().serviceHttpClient(request);
+//         String attachmentName = "sjkhds";
+//         String attachmentFileName = "src/Screenshot_23.png";
+//         String crlf = "\r\n";
+//         String twoHyphens = "--";
+//         String boundary = "*****";
+//
+//        HttpURLConnection httpUrlConnection = null;
+//        URL url = new URL(URL + "/" + 1 + "/uploadImage");
+//        httpUrlConnection = (HttpURLConnection) url.openConnection();
+//        httpUrlConnection.setUseCaches(false);
+//        httpUrlConnection.setDoOutput(true);
+//
+//        httpUrlConnection.setRequestMethod("POST");
+//        httpUrlConnection.setRequestProperty("Content-Type", "multipart/form-data;");
+//        DataOutputStream request = new DataOutputStream(httpUrlConnection.getOutputStream());
+//
+//        request.writeBytes(twoHyphens + boundary + crlf);
+//        request.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\""
+//                + attachmentFileName + "\"" + crlf);
+//        request.writeBytes(crlf);
+//
+//        request.write(createArrayFromFile(file));
+//
+//        request.writeBytes(crlf);
+//        request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+//        request.flush();
+//        request.close();
+//        String result = httpUrlConnection.getResponseMessage();
+//
+//        httpUrlConnection.disconnect();
+//        return result;
+//
 //    }
-
-    public  String createPost(File file) throws IOException {
-
-         String attachmentName = "sjkhds";
-         String attachmentFileName = "src/Screenshot_23.png";
-         String crlf = "\r\n";
-         String twoHyphens = "--";
-         String boundary = "*****";
-
-        HttpURLConnection httpUrlConnection = null;
-        URL url = new URL(URL + "/" + 1 + "/uploadImage");
-        httpUrlConnection = (HttpURLConnection) url.openConnection();
-        httpUrlConnection.setUseCaches(false);
-        httpUrlConnection.setDoOutput(true);
-
-        httpUrlConnection.setRequestMethod("POST");
-        httpUrlConnection.setRequestProperty("Content-Type", "multipart/form-data;");
-        DataOutputStream request = new DataOutputStream(httpUrlConnection.getOutputStream());
-
-        request.writeBytes(twoHyphens + boundary + crlf);
-        request.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\""
-                + attachmentFileName + "\"" + crlf);
-        request.writeBytes(crlf);
-
-        request.write(createArrayFromFile(file));
-
-        request.writeBytes(crlf);
-        request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
-        request.flush();
-        request.close();
-        String result = httpUrlConnection.getResponseMessage();
-
-        httpUrlConnection.disconnect();
-        return result;
-
-    }
-
-    public static byte[] createArrayFromFile(File file) throws IOException {
-
-        // Creating an object of FileInputStream to
-        // read from a file
-        FileInputStream fl = new FileInputStream(file);
-
-        // Now creating byte array of same length as file
-        byte[] arr = new byte[(int) file.length()];
-
-        // Reading file content to byte array
-        // using standard read() method
-        fl.read(arr);
-
-        // lastly closing an instance of file input stream
-        // to avoid memory leakage
-        fl.close();
-
-        // Returning above byte array
-        return arr;
-    }
-
-    public void updatePetUploadImage(ApiResponse apiResponse) throws IOException, InterruptedException {
-
-        Document post = Jsoup
-                .connect(URL + "/" + apiResponse.getPetId() + "/uploadImage")
-                .header("Content-Type", "multipart/form-data")
-                .data("file", "Screenshot_23.jpeg")
-                //.data("type", "image/jpeg")
-                .ignoreHttpErrors(true)
-                .post();
-
-
-
-        System.out.println(post.text());
+//
+//    public static byte[] createArrayFromFile(File file) throws IOException {
+//
+//        // Creating an object of FileInputStream to
+//        // read from a file
+//        FileInputStream fl = new FileInputStream(file);
+//
+//        // Now creating byte array of same length as file
+//        byte[] arr = new byte[(int) file.length()];
+//
+//        // Reading file content to byte array
+//        // using standard read() method
+//        fl.read(arr);
+//
+//        // lastly closing an instance of file input stream
+//        // to avoid memory leakage
+//        fl.close();
+//
+//        // Returning above byte array
+//        return arr;
+//    }
+//
+//    public void updatePetUploadImage(ApiResponse apiResponse) throws IOException, InterruptedException {
+//
+//        Document post = Jsoup
+//                .connect(URL + "/" + apiResponse.getPetId() + "/uploadImage")
+//                .header("Content-Type", "multipart/form-data")
+//                .data("file", "Screenshot_23.jpeg")
+//                //.data("type", "image/jpeg")
+//                .ignoreHttpErrors(true)
+//                .post();
+//
+//
+//
+//        System.out.println(post.text());
 //        HttpRequest request = HttpRequest
 //                .newBuilder()
 //                .uri(URI.create(URL+ "/" + apiResponse.getPetId() + "/uploadImage"))
@@ -161,13 +161,6 @@ public class RequestsPets {
 //        HttpClient client = HttpClient.newBuilder().build();
 //
 //        return client.send(request, HttpResponse.BodyHandlers.ofFile());
-    }
-
-
-
-//    {
-//        "code": 200,
-//            "type": "unknown",
-//            "message": "additionalMetadata: fghdhg\nFile uploaded to ./Screenshot_23.png, 308 bytes"
 //    }
+
 }

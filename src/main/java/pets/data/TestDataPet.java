@@ -36,5 +36,5 @@ public class TestDataPet {
             Pet.Status.available);
 
     File file = new File("src/Screenshot_23.jpg");
-    ApiResponse apiResponse = new ApiResponse(10, file.getAbsoluteFile());
+    public ApiResponse apiResponse = new ApiResponse(1, "fsdf", "dsffsd");
 }

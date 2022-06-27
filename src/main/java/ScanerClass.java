@@ -13,11 +13,8 @@ public class ScanerClass {
         String next = scanner.next();
         switch (next) {
             case "1":
-                System.out.println("fdssdfa");
+                System.out.println("1.CreatePet, 2.GetPetById, 3.getPetByStatus, 4.updatePet, 5.updatePetStoreData");
                 String next1 = scanner.next();
-                RequestsPets requestsPets = new RequestsPets();
-                TestDataPet testDataPet = new TestDataPet();
-                System.out.println(requestsPets.createPet(testDataPet.pet).body());
             case "2":
 
             case "3":

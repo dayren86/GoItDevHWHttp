@@ -9,6 +9,6 @@ import java.io.File;
 @AllArgsConstructor
 public class ApiResponse {
     private int petId;
-    //private String additionalMetadata;
-    private File file;
+    private String name;
+    private String status;
 }
