@@ -1,17 +1,12 @@
-package pets;
+package requests;
 
 import entity.pet.ApiResponse;
 import entity.pet.Pet;
+import requests.service.ServiceGson;
+import requests.service.ServiceHttp;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import pets.service.ServiceGson;
-import pets.service.ServiceHttp;
-
-import java.io.*;
-import java.net.HttpURLConnection;
+import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
@@ -68,7 +63,7 @@ public class RequestsPets {
     public HttpResponse<String> updatePetStoreData(ApiResponse apiResponse) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(URL+ "/" + apiResponse.getPetId()))
+                .uri(URI.create(URL + "/" + apiResponse.getPetId()))
                 .header("accept", "application/json")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .POST(HttpRequest.BodyPublishers.ofString(new ServiceGson().toJsonApiResponse(apiResponse)))
@@ -77,63 +72,7 @@ public class RequestsPets {
         return new ServiceHttp().serviceHttpClient(request);
     }
 
-//    public  String createPost(File file) throws IOException {
-//
-//         String attachmentName = "sjkhds";
-//         String attachmentFileName = "src/Screenshot_23.png";
-//         String crlf = "\r\n";
-//         String twoHyphens = "--";
-//         String boundary = "*****";
-//
-//        HttpURLConnection httpUrlConnection = null;
-//        URL url = new URL(URL + "/" + 1 + "/uploadImage");
-//        httpUrlConnection = (HttpURLConnection) url.openConnection();
-//        httpUrlConnection.setUseCaches(false);
-//        httpUrlConnection.setDoOutput(true);
-//
-//        httpUrlConnection.setRequestMethod("POST");
-//        httpUrlConnection.setRequestProperty("Content-Type", "multipart/form-data;");
-//        DataOutputStream request = new DataOutputStream(httpUrlConnection.getOutputStream());
-//
-//        request.writeBytes(twoHyphens + boundary + crlf);
-//        request.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\""
-//                + attachmentFileName + "\"" + crlf);
-//        request.writeBytes(crlf);
-//
-//        request.write(createArrayFromFile(file));
-//
-//        request.writeBytes(crlf);
-//        request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
-//        request.flush();
-//        request.close();
-//        String result = httpUrlConnection.getResponseMessage();
-//
-//        httpUrlConnection.disconnect();
-//        return result;
-//
-//    }
-//
-//    public static byte[] createArrayFromFile(File file) throws IOException {
-//
-//        // Creating an object of FileInputStream to
-//        // read from a file
-//        FileInputStream fl = new FileInputStream(file);
-//
-//        // Now creating byte array of same length as file
-//        byte[] arr = new byte[(int) file.length()];
-//
-//        // Reading file content to byte array
-//        // using standard read() method
-//        fl.read(arr);
-//
-//        // lastly closing an instance of file input stream
-//        // to avoid memory leakage
-//        fl.close();
-//
-//        // Returning above byte array
-//        return arr;
-//    }
-//
+//TODO так и не рабобрался
 //    public void updatePetUploadImage(ApiResponse apiResponse) throws IOException, InterruptedException {
 //
 //        Document post = Jsoup

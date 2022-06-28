@@ -1,8 +1,8 @@
-package pets;
+package requests;
 
 import entity.store.Store;
-import pets.service.ServiceGson;
-import pets.service.ServiceHttp;
+import requests.service.ServiceGson;
+import requests.service.ServiceHttp;
 
 import java.io.IOException;
 import java.net.URI;

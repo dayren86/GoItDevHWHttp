@@ -1,4 +1,4 @@
-package pets.data;
+package requests.data;
 
 import entity.pet.ApiResponse;
 import entity.pet.Category;

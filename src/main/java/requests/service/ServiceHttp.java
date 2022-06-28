@@ -1,4 +1,4 @@
-package pets.service;
+package requests.service;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
